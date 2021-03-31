@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- <mapper namespace="boards"> -->
+<mapper namespace="com.mycompany.webapp.dao.WishlistDao">
+
+
+<!-- 	<resultMap id="wishlistResultMap" type="wishlist">
+  		<result property="userId" column="user_id"/>
+  		<result property="productNo" column="product_no"/>
+  		<result property="regdate" column="regdate"/>
+  		<result property="productName" column="product_name"/>
+  		<result property="imgSname" column="img_sname"/>
+  	</resultMap>
+  	  -->
+
+
+
+	  <!-- <select id = "selectAll" resultType="wishlist">
+	  	select p.product_name as productName, i.img_sname as imgSname, w.product_no as productNo 
+	  	from wishlist w
+	  	join products p
+	  	on w.product_no = p.product_no
+	  	join products_img i
+	  	on p.product_no = i.product_no
+	  	where w.user_id=#{userId} and i.img_state = 1
+	  	order by w.regdate desc
+	  </select> -->
+	  
+	  <select id = "selectAll" resultType="wishlist">
+	  	select product_no as productNo, user_id as userId, regdate 
+	  	from wishlist
+	  </select> 
+  
+     
+  
+	<!-- <select id="selectByPage" parameterType="pager" resultType="wishlist">
+	  	select rnum, product_no, user_id, regdate, product_name, img_sname
+	      from (
+	          select rownum as rnum, product_no, user_id, regdate, product_name, img_sname
+	          from (
+	              select product_no, user_id, regdate, product_name, img_sname
+	              from wishlist
+	              order by regdate desc
+	          )
+	          where rownum &lt;= #{endRowNo}
+	      )
+	      where rnum &gt;= #{startRowNo}
+  	
+  	</select>  -->
+  	
+  	
+  	
+  	
+  	<!-- <select id="selectByPage" parameterType="pager" resultType="wishlist">
+	  	select rnum,imgSname,productName,regdate,productNo
+	      from (
+	          select rownum as rnum,imgSname,productName,regdate,productNo
+	          from (
+	              select  i.img_sname as imgSname,p.product_name as productName,w.regdate as regdate,w.product_no as productNo
+	              from wishlist w
+				  join products p
+				  on w.product_no = p.product_no
+				  join products_img i
+				  on p.product_no = i.product_no
+				  where i.img_state=1
+				  order by regdate desc
+	          )
+	          where rownum &lt;= #{endRowNo}
+	      )
+	      where rnum &gt;= #{startRowNo}
+  	
+  	</select> -->
+  	
+  	<!--wlsWk 
+  	<select id="selectByPage" parameterType="pager" resultType="wishlist">
+	  	select rnum,productName,regdate,productNo,imgSname
+	      from (
+	          select rownum as rnum,productName,regdate,productNo,imgSname
+	          from (
+	              select  p.product_name as productName,w.regdate as regdate,w.product_no as productNo,i.img_sname as imgSname
+	              from wishlist w
+				  join products p
+				  on w.product_no = p.product_no
+				  join products_img i
+                  on p.product_no = i.product_no
+                  where i.img_state=1
+				  order by regdate desc
+	          )
+	          where rownum &lt;= #{endRowNo}
+	      )
+	      where rnum &gt;= #{startRowNo}
+  	
+  	</select> -->
+  	
+  	<select id="selectByPage" parameterType="pager" resultType="wishlist">
+	  	select rnum,productName,regdate,productNo
+	      from (
+	          select rownum as rnum,productName,regdate,productNo
+	          from (
+	              select  p.product_name as productName,w.regdate as regdate,w.product_no as productNo
+	              from wishlist w
+				  join products p
+				  on w.product_no = p.product_no
+				  order by regdate desc
+	          )
+	          where rownum &lt;= #{endRowNo}
+	      )
+	      where rnum &gt;= #{startRowNo}
+  	
+  	</select>
+  	
+  	
+  	<!-- <select id="selectByPage" parameterType="pager" resultType="wishlist">
+  	select rnum,imgSname,productName,regdate,productNo,user_id
+	      from (
+	          select rownum as rnum,imgSname,productName,regdate,productNo,user_id
+	          from (
+	              select  i.img_sname as imgSname,p.product_name as productName,w.regdate as regdate,w.product_no as productNo,user_id
+	              from wishlist w
+				  join products p
+				  on w.product_no = p.product_no
+				  join products_img i
+				  on p.product_no = i.product_no
+				  where i.img_state=1
+				  order by regdate desc
+	          )
+	          where rownum &lt;= 10
+	      )
+	      where rnum &gt;= 1;
+  	</select> -->
+     <insert id="insert" parameterType="wishlist">
+     
+          insert into wishlist
+         (product_no, user_id, regdate)
+       values
+         (#{productNo}, #{userId}, sysdate)
+   </insert>
+   
+   <!-- <delete id="deleteByWishlistNo" parameterType="wishlist">
+		delete from wishlist 
+		where user_id=#{userId} and product_no=#{productNo}
+		   
+   </delete> -->
+   
+    <delete id="deleteByWishlistNo" parameterType="int">
+		delete from wishlist 
+		where product_no=#{productNo}
+		   
+   </delete>
+   
+ <!--  <select id = "count" resultType="int">
+  	select count(*) 
+  	 from wishlist w
+				  join products p
+				  on w.product_no = p.product_no
+				  join products_img i
+                  on p.product_no = i.product_no
+                  where i.img_state=1
+  </select> -->
+  
+  <select id = "count" resultType="int">
+  	select count(*) 
+  	 from wishlist w
+				  join products p
+				  on w.product_no = p.product_no
+				 
+  </select>
+  
+  
+  
+</mapper>
