@@ -2,16 +2,20 @@ package com.mycompany.webapp.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.webapp.dao.CartDao;
 import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Pager;
-import com.mycompany.webapp.dto.Wishlist;
 
 @Service
 public class CartService {
+	private static final Logger logger =
+			LoggerFactory.getLogger(CartService.class);
+	
 	@Autowired
 	private CartDao cartDao;
 	
@@ -20,8 +24,9 @@ public class CartService {
 		return list;
 	}
 	
-	public List<Cart> getCart(Pager pager) {
-		List<Cart> list = cartDao.selectByPage(pager);
+	public List<Cart> getCart(Pager pager, String userId) {
+		//logger.info(userId);
+		List<Cart> list = cartDao.selectByPage(pager, userId);		
 		return list;
 	}
 	
@@ -30,15 +35,18 @@ public class CartService {
 		return result;
 	}
 
-	public void deleteCart(Cart cart) {
-		cartDao.deleteCart(cart);
+	public void deleteCart(int productNo, String userId) {
+		cartDao.deleteCart(productNo, userId);
+		//logger.info(String.valueOf(result));
 	}
 
-	public int getTotalRows() {
-		int rows = cartDao.count();
+	public int getTotalRows(String userId) {
+		int rows = cartDao.count(userId);
 		return rows;
 	}
 
-
+	public void updateAmount(Cart cart) {
+		cartDao.updateCart(cart);
+	}
 
 }

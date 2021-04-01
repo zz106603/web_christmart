@@ -24,7 +24,9 @@ public interface ProductsDao{
 	public int updateState(int productNo);
 	public int deleteByPno(int productNo);
 	public int count(int cno);
+	public List<Products> selectBySearchPage(@Param("pager")Pager pager,@Param("keyword")String keyword);
 	
+	public int countKeyword(String keyword);
 	
 		
 }

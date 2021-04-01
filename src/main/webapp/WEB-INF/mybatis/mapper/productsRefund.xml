@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					 
+<mapper namespace="com.mycompany.webapp.dao.ProductsRefundDao">
+
+
+	<!-- 환불 신청후 관리자 환불디비에서 관리할 select -->
+	
+	<!-- <select id="selectAll" resultType="productsRefund">
+		select pr.order_no, pr.refund_state, pr.refund_date, pr.refund_reason, 
+					 o.order_date, p.product_no, p.product_name, op.amount
+					 pi.img_oname, pi.img_sname, pi.img_type
+		from products_refund pr, orders o, order_products op, products p, product_img i
+		where pr.order_no = o.order_no
+			and o.order_no = op.order_no
+			and op.product_no = p.product_no
+			and p.product_no = pi.product_no		
+		order by pr.regdate desc
+	</select>  -->
+	
+	
+	
+	<!-- 환불신청 페이지에서 환불신청 주문 목록 리스트 select -->
+	
+	<!-- <select id="selectAll" resultType="productsRefund">
+		select o.order_date as orderDate, o.order_no as orderNo, p.product_name as productName, 
+        op.amount as amount, i.img_sname as imgSname,op.product_no as productNo
+        from orders o, order_products op, products p, products_img i
+        where o.order_no = op.order_no
+        and op.product_no = p.product_no
+        and p.product_no = i.product_no
+        and i.img_state=1;
+	</select> -->
+	
+	
+	
+	<!-- 환불중 -->
+	
+	<!-- <insert id="insert" parameterType="productsRefund">
+		insert into products_refund
+		values
+		(#{orderNo}, 0, #{refundState}, #{refundReason})
+	</insert> -->
+	
+	
+	
+	<!-- 환불완료 -->
+	
+	<!-- <update id="update" parameterType="productsRefund">
+		update products_refund set
+			refund_state = 1,
+			refund_reason = #{refundReason}
+			refund_date = sysdate
+		where order_no = #{orderNo}
+	</update> -->
+	
+</mapper>

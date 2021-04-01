@@ -74,6 +74,14 @@ public class ProductsService {
 		productsDao.updatePhitcount(productNo);
 	}
 
+	public int getTotalRows(String keyword) {
+		int rows = productsDao.countKeyword(keyword);
+		return rows;
+	}
 	
+	public List<Products> getProductsSearchListPager(Pager pager,String keyword){
+		List<Products> list = productsDao.selectBySearchPage(pager,keyword);
+		return list;
+	}	
 	
 }

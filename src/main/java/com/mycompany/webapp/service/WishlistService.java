@@ -19,20 +19,12 @@ public class WishlistService {
 
 	@Autowired
 	private WishlistDao wishlistDao;
-
-	/*public List<Wishlist> getWishlist(String userId) {
-			List<Wishlist> list = wishlistDao.selectAll(userId);
-			logger.info(String.valueOf(list.get(1).getProductNo()));
-			logger.info(String.valueOf(list.get(1).getProductName()));
-			return list;
-		}*/
-
-
+	
 	public List<Wishlist> getWishlist() {
-		List<Wishlist> list = wishlistDao.selectAll();
+		List<Wishlist> list = wishlistDao.selectAllWishlist();
 		return list;
 	}
-	
+
 	public List<Wishlist> getWishlist(Pager pager) {
 		List<Wishlist> list = wishlistDao.selectByPage(pager);
 
@@ -43,16 +35,7 @@ public class WishlistService {
 		int result = wishlistDao.insert(wishlist);
 		return result;
 	}
-	/*	public Wishlist getWishlist(String userId) {
-				Wishlist wishlist = wishlistDao.selectByWishlistNo(userId);
-				
-				return wishlist;
-		}
-	 */
-	/*public void deleteWishlist(String userId, int productNo) {
-		System.out.println(productNo);
-		wishlistDao.deleteByWishlistNo(userId, productNo);
-	}*/
+	
 
 	
 	public void deleteWishlist(int productNo) {

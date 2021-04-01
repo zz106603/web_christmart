@@ -14,10 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.mycompany.webapp.dto.Cart;
 import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.dto.Products;
+import com.mycompany.webapp.dto.Qna;
 import com.mycompany.webapp.service.ProductsService;
+import com.mycompany.webapp.service.QnaService;
 
 
 @Controller
@@ -28,6 +29,9 @@ public class MainController {
 	@Autowired
 	private DataSource dataSource;
 
+	@Autowired
+	QnaService qnaService;
+	
 	@Autowired
 	private ProductsService productsService;
 
@@ -91,14 +95,27 @@ public class MainController {
 	////////////////////////////////////////////////////////
 
 	
-	
 	@GetMapping("/faq")
-	public String openFaq(Cart cart) {
+	public String openFaq() {
+		
 		
 		return "main/faq";
 	}
+	
 	@PostMapping("/qna")
-	public String sendQna() {
+	public String sendQna(Qna qna, HttpSession session) {
+		
+		/*Qna qna = new Qna();
+		qna.setUserId("a1@gmail.com");
+		qna.setEmail("a1@gmail.com");
+		qna.setQnaTitle("default");
+		qna.setQnaContent("s");
+		qnaService.insertFaq(qna);*/
+		
+		qnaService.insertFaq(qna);
+		
+		
+		
 		return "redirect:/main";
 	}
 

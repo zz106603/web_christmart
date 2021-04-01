@@ -16,10 +16,10 @@
 
       <!-- 마이페이지 탭 목록 -->
       <div id="mypageList">
-          <a href="<%=application.getContextPath()%>/purchaselist" class="mypage-tab">구매내역</a>
-          <a href="<%=application.getContextPath()%>/wishlist" class="mypage-tab">위시리스트</a>
-          <a href="<%=application.getContextPath()%>/changeinfo" class="mypage-tab">개인정보수정</a>
-          <a href="<%=application.getContextPath()%>/withdrawal" class="mypage-tab">회원탈퇴</a>
+          <a href="<%=application.getContextPath()%>/user/purchaselist" class="mypage-tab">구매내역</a>
+          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">위시리스트</a>
+          <a href="<%=application.getContextPath()%>/user/changeinfo" class="mypage-tab">개인정보수정</a>
+          <a href="<%=application.getContextPath()%>/user/withdrawal" class="mypage-tab">회원탈퇴</a>
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab-clicked">FAQ</a>
       </div>
   </div>
@@ -28,7 +28,7 @@
   
   
 			<!-- FAQ -->
-            <div class="row">
+             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="accordion" id="accordionExample">
                         <h3 style="text-align: center;">FAQ</h3>
@@ -128,7 +128,7 @@
 
 
 						<!-- form 태그의 action, post, target 기능을 사용해 Q&A 내용을 서버로 전송할 예정 -->
-                        <form action="qna" method="POST" target="_blank">
+                        <form action="qna" method="POST" >
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
@@ -139,35 +139,17 @@
                                                 </span>
                                             </div>
                                             <input
-                                                name="name"
-                                                type="name"
-                                                placeholder="이름"
+                                                name="userId"
+                                                type="email"
+                                                placeholder="회원아이디"
                                                 class="form-control border-left-0"
-                                                required="required">
+                                                required="required"
+                                               
+                                                />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white">
-                                                    <i class="fa fa-phone"></i>
-                                                </span>
-                                            </div>
-                                            <input
-                                                name="phone"
-                                                type="tel"
-                                                placeholder="전화번호"
-                                                class="form-control border-left-0"
-                                                required="required">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
+                               <div class="col">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -180,7 +162,30 @@
                                                 type="email"
                                                 placeholder="이메일"
                                                 class="form-control border-left-0"
-                                                required="required">
+                                                required="required"
+                                             
+                                                >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-white">
+                                                    <i class="fa fa-envelope"></i>
+                                                </span>
+                                            </div>
+                                            <input
+                                                name="qnaTitle"
+                                                type="text"
+                                                placeholder="제목"
+                                                class="form-control border-left-0"
+                                                required="required"
+                                                >
                                         </div>
                                     </div>
                                 </div>
@@ -188,15 +193,17 @@
                             <div class="form-group">
                                 <textarea
                                     class="form-control"
-                                    id="message"
+                                    id="qnaContent"
+                                    name="qnaContent"
                                     rows="5"
                                     placeholder="Enter message"
-                                    required="required"></textarea>
+                                    required="required"
+                                    ></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-primary float-right">
                                 <i class="fa fa-paper-plane"></i>
-                                Send
+                                제출
                             </button>
                         </form>
                     </div>
@@ -204,5 +211,4 @@
             </div>
         </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
-
 

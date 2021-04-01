@@ -20,7 +20,19 @@
     height: fit-content;
     background-color: #d9d9d9;
 }
+.error{
+	font-size: 0.8em;
+	color:red;
+	margin-left:0.5%;
+	margin-bottom:2%;
+}
 
+.success{
+	font-size: 0.8em;
+	color:blue;
+	margin-left:0.5%;
+	margin-bottom:2%;
+}
 
 /* 이메일 입력칸 */
 #email{
@@ -67,3 +79,4 @@ input[type=password] {
     padding: 40px;
     height: fit-content;                                                     
 }
+

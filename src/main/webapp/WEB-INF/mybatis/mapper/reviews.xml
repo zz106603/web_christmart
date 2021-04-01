@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.webapp.dao.ReviewsDao">
+	
+	<select id="selectByPno" parameterType="int" resultType="review">
+		select r.review_no as reviewNo, 
+					 r.order_no as orderNo,
+					 r.product_no as productNo, 
+					 p.product_name as productName, 
+					 r.user_id as userId, 
+					 r.review_content as reviewContent, 
+					 r.review_regdate as reviewRegdate				 
+		from reviews r, products p
+		where r.product_no = p.product_no		
+			and r.product_no = #{productNo}	
+		order by r.review_regdate desc			 
+	</select>
+	
+	<select id="selectReview" parameterType="int" resultType="review">
+		select review_no, order_no, product_no, user_id, review_content, review_regdate
+		from reviews
+		where review_no = #{reviewNo}
+	</select>
+	
+	<!-- <select id="selectByPage" parameterType="pager" resultType="reviews">
+		select rnum, review_no, order_no, product_no, user_id, review_content, review_regdate
+    from (
+        select rownum as rnum, order_no, product_no, user_id, review_content, review_regdate
+        from (
+            select review_no, order_no, product_no, user_id, review_content, review_regdate
+            from reviews
+            order by review_regdate desc
+        )
+        where rownum &lt;= #{endRowNo}
+    )
+    where rnum &gt;= #{startRowNo}
+	</select> -->
+	
+	<insert id="insert" parameterType="review">	
+		<selectKey keyProperty="review_no" resultType="int" order="BEFORE">
+			select seq_reviews_review_no.nextval from dual
+		</selectKey>	
+		insert into reviews
+		(review_no, order_no, product_no, user_id, review_content, review_regdate)
+		values
+		(#{reviewNo}, #{orderNo}, #{productNo}, #{userId}, #{reviewContent}, sysdate)
+	</insert>
+	
+	<delete id="deleteReview">
+		delete from reviews
+		where review_no = #{reviewNo}	and user_id = #{userId}
+	</delete>
+	
+	<select id="count" resultType="int">
+		select count(*) 
+		from reviews r, products p
+		where r.product_no = p.product_no		
+	</select>
+</mapper>

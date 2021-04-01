@@ -3,18 +3,17 @@ package com.mycompany.webapp.dto;
 import java.util.Date;
 
 public class Cart {
-	private int productNo;	//상품 번호
-	private String userId;	//사용자 아이디
-	private int amount;		//구매 수량
-	private int allPrice;	//총 구매 가격
-	private Date regdate;	//카트 등록일
+	private int productNo;		//상품 번호
+	private String userId;		//사용자 아이디
+	private int amount;			//구매 수량
+	private int allPrice;		//총 구매 가격
+	private Date regdate;		//카트 등록일
 	private String productName;	//상품 이름
-	
-	private int price;		//상품 가격
+	private int price;			//상품 가격
 	private String imgOname;	//상품 이미지
 	private String imgSname;
 	private String imgType;
-	
+		
 	public int getProductNo() {
 		return productNo;
 	}
@@ -33,11 +32,11 @@ public class Cart {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public int getPrice() {
-		return price;
+	public int getAllPrice() {
+		return allPrice;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setAllPrice(int allPrice) {
+		this.allPrice = allPrice;
 	}
 	public Date getRegdate() {
 		return regdate;
@@ -51,11 +50,11 @@ public class Cart {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public int getAllPrice() {
-		return allPrice;
+	public int getPrice() {
+		return price;
 	}
-	public void setAllPrice(int allPrice) {
-		this.allPrice = allPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public String getImgOname() {
 		return imgOname;

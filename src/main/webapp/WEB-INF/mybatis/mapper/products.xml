@@ -340,4 +340,41 @@
 		WHERE product_category_no = #{cno}
 	</select>
 	
-</mapper>
+	<select id="countKeyword" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM products
+		WHERE product_name LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	
+	<select id="selectBySearchPage"  resultType="product">
+		select rnum,productNo,productName,productPrice,imgSname
+	      from (
+	          select rownum as rnum,productNo,productName,productPrice,imgSname
+	          from (
+				        SELECT 
+						 p.product_no as productNo, 
+						 p.product_name as productName, 
+						 p.product_price as productPrice, 
+						 i.img_sname as imgSname
+					FROM 
+			      	  	 products p
+				  	JOIN 
+				  		 products_img i	
+				  	ON 
+				  		 p.product_no = i.product_no
+				    JOIN
+				      	 product_categories c  
+				    ON	
+				    	 p.product_category_no = c.category_no
+				 	WHERE 
+				 	  	 p.product_name LIKE '%'||#{keyword}||'%' and i.img_state=1
+	          )
+	          where rownum &lt;= #{pager.endRowNo}
+	      )
+	      where rnum &gt;= #{pager.startRowNo}
+
+	</select>
+	
+	
+	</mapper>
