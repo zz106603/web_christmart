@@ -23,7 +23,7 @@ var pwckCheck = false;
         }
 	}
 	
-	 function validate() {
+	 function joinValidate() {
 		event.preventDefault();
 
 		//유효성 검사 코드

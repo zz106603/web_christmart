@@ -43,12 +43,12 @@
 				
 						<!-- 회원가입 창으로 넘어감 -->
 						<div class="d-flex justify-content-start links">
-							<a href="signup">회원가입</a>
+							<a href="<%=application.getContextPath()%>/signup">회원가입</a>
 						</div>
 
 						<!-- 아이디/비밀번호 찾기 창으로 넘어감 -->
 						<div class="d-flex justify-content-start links">
-							<a href="findidpw">아이디/비밀번호 찾기</a>
+							<a href="<%=application.getContextPath()%>/findidpw">아이디/비밀번호 찾기</a>
 						</div>
 
 		</div>

@@ -69,22 +69,22 @@
                     <li>
                         <a href="<%=application.getContextPath()%>/faq">마이페이지</a>
                     </li>
-                    <li>
-                        <a href="<%=application.getContextPath()%>/auth/signup">회원가입</a>
-                    </li>
                     <sec:authorize access="isAnonymous()">
                      <li>
 						 <a href="<%=application.getContextPath()%>/auth/login">로그인</a>
 					</li>
+					<li>
+                        <a href="<%=application.getContextPath()%>/signup">회원가입</a>
+                    </li>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
+					<li style="margin-top:0;">
 						<form method="post" class="d-inline-block" action="<%=application.getContextPath()%>/logout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-							<li>
-								<span>USER: <sec:authentication property="name"/></span>
-								<button class="btn btn-success btn-sm">로그아웃</button>
-							</li>
+								사용자: <sec:authentication property="name"/>
+								<button class="logout-button">로그아웃</button>
 						</form>
+					</li>
 					</sec:authorize>
                 </ul>
             </div>

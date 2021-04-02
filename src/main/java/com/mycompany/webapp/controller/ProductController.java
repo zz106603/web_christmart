@@ -70,7 +70,7 @@ public class ProductController {
 
 	         
 	         // 응답 HTTP 바디에 이미지 데이터를 출력
-	         InputStream is = new FileInputStream("C:/Users/629jy/Desktop/상품사진들/캔들/" + imgSname + "." + imgType);
+	         InputStream is = new FileInputStream("C:/Users/COM/Desktop/상품사진들/캔들/" + imgSname + "." + imgType);
 	         OutputStream os = response.getOutputStream();
 	         FileCopyUtils.copy(is, os);
 	         os.flush();

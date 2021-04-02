@@ -23,7 +23,7 @@
                       authentication-failure-url="/auth/login"
                       />
    	
-<!--  <security:csrf disabled="true"/> -->
+  <!-- <security:csrf disabled="true"/>  -->
       
       <!-- POST 방식으로 요청해야함 -->
       <security:logout logout-url="/logout"/>

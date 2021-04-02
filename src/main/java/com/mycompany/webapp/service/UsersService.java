@@ -26,4 +26,14 @@ public class UsersService {
 		return user;
 	}
 
+	public int changeInfo(Users user) {
+		int result = usersDao.update(user);
+		return result;
+	}
+
+	public String findById(String userName, String userPhone) {
+		String id = usersDao.findById(userName, userPhone);
+		return id;
+	}
+
 }

@@ -23,20 +23,21 @@
 
 					<!-- 이름과 전화번호를 데이터베이스와 대조해 아이디 리턴 -->
 					<div class="card-body-find">
-						<form>
+						<form action="<%=application.getContextPath()%>/findid" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<div class="input-group form-group">
 								<input type="text" class="form-control" placeholder="이름"
-									id="find-name">
+									id="userName" name="userName">
 							</div>
 
 							<div class="input-group form-group">
 								<input type="text" class="form-control" placeholder="전화번호"
-									id="find-phone">
+									id="userPhone" name="userPhone">
 							</div>
 
 							<div class="form-group">
 								<input type="submit" value="아이디 찾기" class="btn float-right"
-									id="find_btn" onclick="find_id()">
+									id="find_btn">
 							</div>
 						</form>
 					</div>

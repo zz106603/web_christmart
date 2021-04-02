@@ -5,7 +5,7 @@
         <link href="<%=application.getContextPath() %>/resources/css/signup.css" rel="stylesheet" type="text/css"/>
 
 
-<script src="<%=application.getContextPath() %>/resources/js/user/validate.js"></script> 
+<script src="<%=application.getContextPath() %>/resources/js/user/joinValidate.js"></script> 
 
   <!-- 컨텐츠 -->
          <div class="signup-content">
@@ -27,7 +27,8 @@
 
                             <!-- 회원가입 바디 -->
                             <div class="card-body">
-                                <form id="joinForm" name="joinForm" method="post" action="<%=application.getContextPath()%>/auth/signup" onsubmit="validate()">
+                            
+                                <form id="joinForm" name="joinForm" method="post" action="<%=application.getContextPath()%>/signup" onsubmit="joinValidate()">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     <div class="input-group form-group" style="margin-bottom:0;">
                                         <input type="text" class="form-control" id="userName" name="userName" placeholder="이름">

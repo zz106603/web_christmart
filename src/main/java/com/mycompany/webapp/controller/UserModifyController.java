@@ -1,14 +1,17 @@
 package com.mycompany.webapp.controller;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.webapp.dto.Users;
 import com.mycompany.webapp.service.UsersService;
@@ -26,18 +29,34 @@ public class UserModifyController {
 	public String openChangeinfo(Authentication auth, Model model) {
 		
 		String userId = auth.getName();
-		logger.info(userId);
+		
 		Users user = usersService.getUserDetail(userId); 
 		model.addAttribute("user", user);		
-		
-		logger.info(user.getUserName());
 		
 		return "usermodify/changeInfo";
 	}
 	
-	@PostMapping("/changeinfo")
-	public String Changeinfo() {
-		return "redirect:/main";
+	
+	@PostMapping(value = "/changeinfo", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String Changeinfo(Users user) {
+		
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		user.setUserPassword(bpe.encode(user.getUserPassword()));
+		String encodedPassword = bpe.encode(user.getUserPassword());
+		
+		logger.info(user.getRoadAddress());
+		logger.info(user.getUserId());
+		
+		
+		int changeResult = usersService.changeInfo(user);
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", "success");
+		
+		logger.info(jsonObject.toString());
+		return jsonObject.toString();
+		
 	}
 	
 	@GetMapping("/withdrawal")
@@ -50,3 +69,4 @@ public class UserModifyController {
 		return "redirect:/main";
 	}
 }
+

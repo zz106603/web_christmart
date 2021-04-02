@@ -3,10 +3,11 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
         <link href="<%=application.getContextPath() %>/resources/css/mypage.css" rel="stylesheet" type="text/css"/>
-
         <link href="<%=application.getContextPath() %>/resources/css/changeInfo.css" rel="stylesheet" type="text/css"/>
-
-
+        <link href="<%=application.getContextPath() %>/resources/css/login.css" rel="stylesheet" type="text/css"/>
+		<script src="<%=application.getContextPath() %>/resources/js/user/changeInfoValidate.js"></script>
+	
+		 
   <!-- 컨텐츠 -->
   <div >
 	   <!-- 마이페이지 타이틀 -->
@@ -23,111 +24,122 @@
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>
       </div>
   </div>
-
-    <form method="post" action="changeinfo">
-  <div >
-      <h3 id="mypageTitle-under">개인정보수정</h3>
-      <hr/>
-      <table id="changeTable">
-          <tr>
-              <th>
-                  <label for="name">이름*</label>
-              </th>
-
-              <td><input type="text" value="${user.userName}" class="name" name="userName" required="required"></td>
-          </tr>
-          <tr>
-              <th>
-                  <label for="id">아이디*</label>
-              </th>
-              <td>${user.userId}</td>
-          </tr>
-          <tr>
-              <th>
-                  <label for="pw">비밀번호*</label>
-              </th>
-              <td><input type="password" name="upassword" minlength="4" maxlength="16" required="required">
-                  <small>*비밀번호는 4~16자리로 입력해주세요.</small>
-              </td>
-          </tr>
-          <tr>
-              <th>
-                  <label for="check_pw">비밀번호확인*</label>
-              </th>
-              <td>
-              	<input type="password">
-              	 <input type="button" id="checkPassword" class="btn btn-info btn-sm"  value="비밀번호 확인"
-                      onclick="passwordCk()">
-              </td>
-
-          </tr>
-          <tr>
-              <th rowspan="3">
-                  <label for="address">주소*</label>
-              </th>
-              <td>
-                  <!-- 우편번호 찾기 post.js 파일 -->
-
-                  <div>
-                      <input
-                          type="text"
-                          id="sample4_postcode"
-                          class="form-control"
-                          placeholder="우편번호"
-                          readonly="readonly">
-                      <input
-                          type="button"
-                          onclick="excution_daum_address()"
-                          class="form-control signup_btn"
-                          value="우편번호 찾기">
-                      <br>
-                  </div>
-
-                  <div><input
-                      type="text"
-                      id="sample4_roadAddress"
-                      class="form-control"
-                      placeholder="도로명주소"
-                      readonly="readonly"></div>
-                  <div><input
-                      type="text"
-                      id="sample4_detailAddress"
-                      class="form-control"
-                      placeholder="상세주소"></div>
-              </td>
-          </tr>
-          <tr>
-              
-          </tr>
-          <tr>
-             
-          </tr>
-          <tr>
-              <th>
-                  <label for="phoneNum">휴대전화*</label>
-              </th>
-              <td>
-                  <input type="text" required="required">
-              </td>
-          </tr>
-      </table>
-  </div>
+	<form onsubmit="changeInfoValidate()">
+    <%-- <form id="changeForm" name="changeForm" method="post" action="<%=application.getContextPath()%>/user/changeinfo" onsubmit="changeInfoValidate()"> --%>
+    	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		  <div >
+		      <h3 id="mypageTitle-under">개인정보수정</h3>
+		      <hr/>
+		      <table id="changeTable">
+		          <tr>
+		              <th>
+		                  <label for="userName">이름*</label>
+		              </th>
+		              <td><input type="text" value="${user.userName}" id="userName" name="userName" class="name" required="required"></td>
+		              <td id="errorName" class="error"></td>
+		          </tr>
+		          <tr>
+		              <th>
+		                  <label for="userId">아이디*</label>
+		              </th>
+		              <input type="hidden" value="${user.userId}" id="userId" name="userId">
+		              <td>${user.userId}</td>
+		          </tr>
+		          <tr>
+		              <th>
+		                  <label for="userPassword">비밀번호*</label>
+		              </th>
+		              <td><input type="password" id="userPassword" name="userPassword" minlength="4" maxlength="16">
+		                  <small>*비밀번호는 4~16자리로 입력해주세요.</small>
+		              </td>
+		          </tr>
+		          <tr>
+		              <th>
+		                  <label for="check_pw">비밀번호확인*</label>
+		              </th>
+		              <td>
+		              	<input type="password" id="userPasswordCk" name="userPasswordCk" minlength="4" maxlength="16">
+		              	 <input type="button" id="checkPassword" name="checkPassword" class="btn btn-info btn-sm"  value="비밀번호 확인" onclick="passwordCk()">
+		              </td>
+		            
+		          </tr>
+		          <tr>
+		          		<th></th>
+		          		<td>
+		          			<div id="errorPassword" class="error"></div>
+		          			<div id="nonSamePassword" class="error"></div>
+		          			<div id="SamePassword" class="success"></div>
+		          		</td>
+		          </tr>
+		          <tr>
+		              <th rowspan="3">
+		                  <label for="address">주소*</label>
+		              </th>
+		              <td>
+		                  <!-- 우편번호 찾기 post.js 파일 -->
+		
+		                  <div>
+		                      <input
+		                          type="text"
+		                          id="zipCode"
+		                          class="form-control"
+		                          name="zipCode"
+		                          placeholder="우편번호"
+		                          readonly="readonly">
+		                      <input
+		                          type="button"
+		                          onclick="excution_daum_address()"
+		                          class="form-control signup_btn"
+		                          value="우편번호 찾기">
+		                      <br>
+		                  </div>
+		
+		                  <div><input
+		                      type="text"
+		                      id="roadAddress"
+		                      class="form-control"
+		                      name="roadAddress"
+		                      placeholder="도로명주소"
+		                      readonly="readonly"></div>
+		                  <div><input
+		                      type="text"
+		                      id="sample4_detailAddress"
+		                      name="detailAddress"
+		                      class="form-control"
+		                      placeholder="상세주소"></div>
+		                      <span id="errorDetailAddress" class="error"></span>  
+		              </td>
+		          </tr>
+		          <tr>
+		              
+		          </tr>
+		          <tr>
+		             
+		          </tr>
+		          <tr>
+		              <th>
+		                  <label for="phoneNum">휴대전화*</label>
+		              </th>
+		              <td>
+		                  <input type="text" id="userPhone" name="userPhone">
+		              </td>
+		          </tr>
+		          <tr>
+		          	<th></th>
+		          	<td id="errorPhone" class="error"></td>
+		          </tr>
+		          
+		      </table>
+		  </div>
   
   <div>
-      <button
+      <input
           type="submit"
           style="background-color: #d15851; color: #f3f3f3;"
           class="btn changebtn"
-          ;=";">
-          <a href="<%=application.getContextPath()%>/main" style="color:#f3f3f3">저장</a>
-      </button>
-      <button
-          type=""
-          style="background-color: #d15851; color: #f3f3f3;"
-          class="btn changebtn"
-          ;=";"> 
-          <a href="<%=application.getContextPath()%>/main" style="color:#f3f3f3">취소</a>
-      </button>
+          value="저장하기"
+          style="color:#f3f3f3"
+          >
   </div>
   
   </form>
@@ -170,8 +182,8 @@
 			                    addr += ' ';
 			                }
 			                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-			                $("#sample4_postcode").val(data.zonecode);
-			                $("#sample4_roadAddress").val(addr);
+			                $("#zipCode").val(data.zonecode);
+			                $("#roadAddress").val(addr);
 			                // 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
 			                $("#sample4_detailAddress").attr("readonly", false);
 			                $("#sample4_detailAddress").focus();

@@ -33,7 +33,7 @@ public class OrderController {
 	private static final Logger logger =
 			LoggerFactory.getLogger(OrderController.class);
 
-	Cart[] cartArray = new Cart[10];
+	Cart[] cartArray;
 	
 	@Autowired
 	private CartService cartService;
@@ -72,6 +72,7 @@ public class OrderController {
 		session.setAttribute("pager", pager);		
 		
 		List<Cart> clist = cartService.getCart(pager, userId);
+		cartArray = new Cart[clist.size()];
 		
 		//logger.info(String.valueOf(clist.size()));
 		//logger.info(clist.getIndex(1).getIndex);

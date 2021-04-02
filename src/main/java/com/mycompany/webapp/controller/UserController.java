@@ -5,15 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.webapp.dto.Users;
 import com.mycompany.webapp.service.UsersService;
 
 @Controller
-@RequestMapping("/auth")
 public class UserController {
 	private static final Logger logger =
 			LoggerFactory.getLogger(UserController.class);
@@ -21,7 +20,7 @@ public class UserController {
 	@Autowired
 	private UsersService usersService;
 	
-	@GetMapping("/login")
+	@GetMapping("/auth/login")
 	public String openLogin() {
 		return "user/login";
 	}
@@ -46,9 +45,29 @@ public class UserController {
 	}
 	
 	@GetMapping("/findidpw")
-	public String openFindidpw() {
+	public String openFindIdPw() {
 		return "user/findidpw";
 	}
+	
+	@PostMapping("/findid")
+	public String findId(String userName, String userPhone, Model model) {
+		
+		logger.info(userName);
+		logger.info(userPhone);
+		String id = usersService.findById(userName, userPhone);
+		
+		logger.info(id);
+		model.addAttribute("userId", id);
+		
+		return "user/findid";
+	}
+	
+	
+	@GetMapping("/changePassword")
+	public String changePassword() {
+		return "user/changepassword";
+	}
+	
 	
 
 	
