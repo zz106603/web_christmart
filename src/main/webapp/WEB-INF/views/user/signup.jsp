@@ -5,6 +5,8 @@
         <link href="<%=application.getContextPath() %>/resources/css/signup.css" rel="stylesheet" type="text/css"/>
 
 
+<script src="<%=application.getContextPath() %>/resources/js/user/validate.js"></script> 
+
   <!-- 컨텐츠 -->
          <div class="signup-content">
             <div class="container-fluid">
@@ -25,51 +27,67 @@
 
                             <!-- 회원가입 바디 -->
                             <div class="card-body">
-                                <form id="joinForm" name="joinForm" method="post" action="signup">
-                                    <div class="input-group form-group">
-                                        <input type="text" class="form-control" name="uname" placeholder="이름">
+                                <form id="joinForm" name="joinForm" method="post" action="<%=application.getContextPath()%>/auth/signup" onsubmit="validate()">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <div class="input-group form-group" style="margin-bottom:0;">
+                                        <input type="text" class="form-control" id="userName" name="userName" placeholder="이름">
                                     </div>
-
+                                    <div id="errorName" class="error"></div>
+                                    <div class="input-group form-group" style="margin-bottom:0;">
+	                                    <div>
+	                                        <input type="text" id="userSsn1" name="userSsn1" class="form-control" placeholder="주민번호 앞자리">
+	                                    </div>
+	                                    -
+                                        <div>
+                                            <input type="password" id="userSsn2" name="userSsn2" class="form-control" placeholder="주민번호 뒷자리">
+                                        </div>
+                                    </div>
+  									<div id="errorSsn" class="error"></div>
                                     <!-- 이메일 인증 진행 email.js 파일 -->
-                                    <div class="input-group form-group">
-                                        <input type="text" id="uemail" name="uemail" class="form-control" placeholder="이메일 아이디">
+                                    <div class="input-group form-group" style="margin-bottom:0;">
+                                        <input type="text" id="userId" name="userId" class="form-control" placeholder="이메일 아이디">
                                         <input
                                             type="button"
                                             class="btn btn-primary form-control signup-btn"
-                                            onclick="check_Email_all()"
                                             value="이메일 인증">
                                     </div>
-
+									<div id="errorId" class="error"></div>
+									
+									
                                     <!-- 비밀번호 확인 진행 password.js 파일 -->
-                                    <div class="input-group form-group">
+                                    <div class="input-group form-group" style="margin-bottom:0;">
                                         <div>
-                                            <input type="password" id="upassword" name="upassword" class="form-control" placeholder="비밀번호">
+                                            <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="비밀번호">
                                         </div>
                                         <div>
-                                            <input
-                                                type="password"
-                                                id="upassword_same"
-                                                name="upassword_same"
-                                                class="form-control"
-                                                placeholder="비밀번호 재입력">
+                                            <input type="password" id="userPasswordCk" name="userPasswordCk" class="form-control" placeholder="비밀번호 재입력">
                                         </div>
                                         <div>
                                             <input
                                                 type="button"
+                                                id="checkPassword"
                                                 class="btn btn-primary form-control signup-btn"
-                                                onclick="password_check()"
-                                                value="비밀번호 확인">
+                                                value="비밀번호 확인"
+                                               	onclick="passwordCk()">
                                         </div>
                                     </div>
+                                     <div id="nonSamePassword" class="error"></div>
+                                     <div id="SamePassword" class="success"></div>
+                                     <div id="errorPassword" class="error"></div>
+                                    
+                                     <div class="input-group form-group" style="margin-bottom:0;">
+                                        <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="전화번호('-'없이 작성)">
+                                   	 </div>
+                                   	 <div id="errorPhone" class="error"></div>
 
                                     <!-- 우편번호 찾기 post.js 파일 -->
-                                    <div class="input-group form-group">
+                                    <div class="input-group form-group" style="margin-bottom:0;">
                                         <div>
                                             <input
                                                 type="text"
                                                 id="sample4_postcode"
                                                 class="form-control"
-                                                name="zipcode"
+                                                name="zipCode"
                                                 placeholder="우편번호"
                                                 readonly="readonly">
                                             <input
@@ -80,46 +98,50 @@
                                             <br>
                                         </div>
 
-                                        <div><input
-                                            type="text"
-                                            id="sample4_roadAddress"
-                                            class="form-control"
-                                            name="roadname"
-                                            placeholder="도로명주소"
-                                            readonly="readonly"></div>
-                                        <div><input
-                                            type="text"
-                                            id="sample4_detailAddress"
-                                            class="form-control"
-                                            name="detailaddress"
-                                            placeholder="상세주소"></div>
+                                        <div>
+                                        	<input
+	                                            type="text"
+	                                            id="sample4_roadAddress"
+	                                            class="form-control"
+	                                            name="roadAddress"
+	                                            placeholder="도로명주소"
+	                                            readonly="readonly">
+                                        </div>
+                                        <div>
+                                        	<input
+	                                            type="text"
+	                                            id="sample4_detailAddress"
+	                                            class="form-control"
+	                                            name="detailAddress"
+	                                            placeholder="상세주소">
+	                                            <span id="errorDetailAddress" class="error"></span>  
+	                                    </div>
+	                                  
                                     </div>
+                                   
 
                                     <!-- 환불용 계좌번호 입력 -->
-                                    <div class="input-group form-group">
-                                        <input type="text" class="form-control" placeholder="계좌번호('-'없이 작성)">
-                                        <input
-                                            type="button"
-                                            class="btn btn-primary form-control signup-btn"
-                                            name="account"
-                                            onclick="account_check()"
-                                            value="계좌번호 확인">
+                                    <div class="input-group form-group" style="margin-bottom:0;">
+                                        <input type="text" class="form-control"  id="userAccount" name="userAccount"placeholder="계좌번호('-'없이 작성)">
                                     </div>
-                                    <div class="input-group form-group">
-                                        <input type="text" class="form-control" id="bankname" name="bankname" placeholder="은행명">
+                                    <div id="errorAccount" class="error"></div>
+                                    <div class="input-group form-group" style="margin-bottom:0;">
+                                        <input type="text" class="form-control" id="userBank" name="userBank" placeholder="은행명">
                                     </div>
+                                    <div id="errorBank" class="error"></div>
 
-                                    <div class="input-group form-group">
-                                        <input type="text" class="form-control" id="accountholder" name="accountholder" placeholder="예금주">
+                                    <div class="input-group form-group" style="margin-bottom:0;">
+                                        <input type="text" class="form-control" id="accountName" name="accountName" placeholder="예금주">
                                     </div>
-                                    
+                                    <div id="errorAccountName" class="error"></div>
                                     <div class="form-group">
                                         <hr/>
                                         <input
                                             type="submit"
                                             value="회원가입"
+                                            id="saveUser"
                                             class="btn float-right signup-btn-complete"
-                                            onclick="password_check()">
+                                            >
                                     </div>
 
                                 </form>

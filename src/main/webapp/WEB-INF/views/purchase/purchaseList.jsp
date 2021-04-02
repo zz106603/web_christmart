@@ -29,77 +29,27 @@
    <div class="container-fluid border">
        <h3 id="mypageTitle-under">구매내역</h3>
        <hr/>
-       <div class="row purchaseContent">
-           <div class="col" style="border-right:1px solid white;">
-               <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/3.jpg" class="purchaseImg">
-           </div>
-           <div class="col purchase-details">
-               <p>주문일자 : 2021.02.02</p>
-               <p>주문번호 : 202102021129384059</p>
-               <p>주문상품 : Snow globe girl with star 9cm</p>
-               <p>선택옵션 : 단일품목</p>
-               <p>선택수량 : 1개</p>
-               <p>구매상태 : 배송준비중</p>
-           </div>
-           <div class="col">
-               <a href="<%=application.getContextPath()%>/exchangerefund" class="exchange-btn">교환/환불/구매취소</a>
-           </div>
-       </div>
+       
+       <c:forEach var="order" items="${list}">
+	       <div class="row purchaseContent">
+	       
+	           <div class="col purchase-details">
+	               <p>주문일자 : ${order.orderDate}</p>
+	               <p>주문번호 : ${order.orderNo}</p>
+	               <p>주문가격 : ${order.allPrice}</p>
+	               <p>선택옵션 : 단일품목</p>
+	           </div>
+	           
+	           <div class="col">
+	               <a href="<%=application.getContextPath()%>/purchaseListDetail" class="exchange-btn">주문상세정보</a>
+	           </div>
+	           <div class="col">
+	               <a href="<%=application.getContextPath()%>/exchangerefund" class="exchange-btn">교환/환불/구매취소</a>
+	           </div>
+	    
+	       </div>
 
-       <div class="row purchaseContent">
-           <div class="col" style="border-right:1px solid white;">
-               <img src="<%=application.getContextPath() %>/resources/images/캔들/6.jpg" class="purchaseImg">
-           </div>
-           <div class="col" style="padding-top: 20px;">
-               <p>주문일자 : 2021.01.08</p>
-               <p>주문번호 : 202101081129384059</p>
-               <p>주문상품 : The boy and ski 10cm</p>
-               <p>선택옵션 : 단일품목</p>
-               <p>선택수량 : 1개</p>
-               <p>구매상태 : 배송완료</p>
-           </div>
-           <div class="col">
-               <button class="review-btn" onclick="open_review()">한줄평 쓰기</button>
-	           <br/>
-	           <a href="<%=application.getContextPath()%>/exchangerefund" class="exchange-btn">교환/환불/구매취소</a>
-	       </div>
-	   </div>
-
-	   <div class="row purchaseContent">
-	       <div class="col" style="border-right:1px solid white;">
-	           <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/5.jpg" class="purchaseImg">
-	       </div>
-	       <div class="col" style="padding-top: 20px;">
-	           <p>주문일자 : 2021.02.02</p>
-	           <p>주문번호 : 202102021129384059</p>
-	           <p>주문상품 : Snow globe girl with star 9cm</p>
-	           <p>선택옵션 : 단일품목</p>
-	           <p>선택수량 : 1개</p>
-	           <p>구매상태 : 배송준비중</p>
-	       </div>
-	       <div class="col">
-	           <a href="<%=application.getContextPath()%>/exchangerefund" class="exchange-btn">교환/환불/구매취소</a>
-	       </div>
-	   </div>
-
-	   <div class="row purchaseContent">
-	       <div class="col" style="border-right:1px solid white;">
-	           <img src="<%=application.getContextPath() %>/resources/images/캔들/1.jpg" class="purchaseImg">
-	       </div>
-	       <div class="col" style="padding-top: 20px;">
-	           <p>주문일자 : 2021.01.08</p>
-	           <p>주문번호 : 202101081129384059</p>
-	           <p>주문상품 : The boy and ski 10cm</p>
-	           <p>선택옵션 : 단일품목</p>
-	           <p>선택수량 : 1개</p>
-	           <p>구매상태 : 배송완료</p>
-	       </div>
-	       <div class="col">
-	           <button class="review-btn" onclick="open_review()">한줄평 쓰기</button>
-		        <br/>
-		        <a href="<%=application.getContextPath()%>/exchangerefund" class="exchange-btn">교환/환불/구매취소</a>
-		    </div>
-		</div>
+       </c:forEach>
 
 	<!--페이지 넘어가는 부분-->
 	  <div class="pagination-purchase">

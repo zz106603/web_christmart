@@ -25,7 +25,19 @@
     margin-left: 4px;
 }
 
+.error{
+	font-size: 0.8em;
+	color:red;
+	margin-left:0.5%;
+	margin-bottom:2%;
+}
 
+.success{
+	font-size: 0.8em;
+	color:blue;
+	margin-left:0.5%;
+	margin-bottom:2%;
+}
 
 .card-login{
     height: 350px;

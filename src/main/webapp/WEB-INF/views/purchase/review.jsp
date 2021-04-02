@@ -34,39 +34,39 @@
 <body>
     
     <!-- 한 줄 평 카드 -->
-    <div class="container-review">
-            <div class="card-review">
-                <div class="card-header">
-                    <h6>한 줄 평 작성</h6>
-                </div>
-                
-                <div class="card-body">
-                    <form>
-                        <div class="input-group form-group">
-                            <input type="text" class="form-control" placeholder="주문번호 js파일 연결" readonly>
-                        </div>
+    <form method="post" action="createreview">
+    		<div class="container-review">
+           <div class="card-review">
+               <div class="card-header">
+                   <h6>한 줄 평 작성</h6>
+               </div>
+               
+               <div class="card-body">
+                   <div class="input-group form-group">
+                       <input type="text" class="form-control" value="${reviews.orderNo}" readonly>
+                   </div>
 
-                        <div class="input-group form-group">
-                            <input type="text" class="form-control" placeholder="상품명 js파일 연결" readonly>
-                        </div>
+                   <div class="input-group form-group">
+                       <input type="text" class="form-control" value="${reviews.productName}" readonly>
+                   </div>
 
-                        <!-- 한 줄 평 작성-->
-                        <div class="input-group form-group">
-                            <input type="text" class="form-control" id="review-write" placeholder="한 줄 평 작성 (30자 이내)" maxlength='30'>
-                        </div>
-                    </form>
-                </div>
+                   <!-- 한 줄 평 작성-->
+                   <div class="input-group form-group">
+                       <input type="text" class="form-control" id="review-write" placeholder="한 줄 평 작성 (30자 이내)" name="review-write" maxlength='30'>
+                   </div>
+                   
+               </div>
 
-                <div class="card-footer-review">
-
-                        <div class="card-review-footer">
-                        <!-- 한 줄 평 내용 게시 -->
-                            <input type="submit" value="게시" class="btn" id="review-submit-btn" onclick="alert('한 줄 평이 등록되었습니다.')">
-                        </div>
-                </div>
-
-            </div>
+               <div class="card-footer-review">
+                   <div class="card-review-footer">
+                   <!-- 한 줄 평 내용 게시 -->
+                   	<a type="submit" class="btn" id="review-submit-btn" href="createreview" onclick="close_review()">게시	</a>                        
+                   </div>
+               </div>
+               
+           </div>
         </div>
+    </form>
     
 </body>
 </html>

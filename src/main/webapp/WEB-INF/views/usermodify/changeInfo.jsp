@@ -16,10 +16,10 @@
 
       <!-- 마이페이지 탭 목록 -->
        <div id="mypageList">
-          <a href="<%=application.getContextPath()%>/purchaselist" class="mypage-tab">구매내역</a>
-          <a href="<%=application.getContextPath()%>/wishlist" class="mypage-tab">위시리스트</a>
-          <a href="<%=application.getContextPath()%>/changeinfo" class="mypage-tab-clicked">개인정보수정</a>
-          <a href="<%=application.getContextPath()%>/withdrawal" class="mypage-tab">회원탈퇴</a>
+          <a href="<%=application.getContextPath()%>/user/purchaselist" class="mypage-tab">구매내역</a>
+          <a href="<%=application.getContextPath()%>/user/wishlist" class="mypage-tab">위시리스트</a>
+          <a href="<%=application.getContextPath()%>/user/changeinfo" class="mypage-tab-clicked">개인정보수정</a>
+          <a href="<%=application.getContextPath()%>/user/withdrawal" class="mypage-tab">회원탈퇴</a>
           <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>
       </div>
   </div>
@@ -34,13 +34,13 @@
                   <label for="name">이름*</label>
               </th>
 
-              <td><input type="text" value="홍길동" class="name" name="uname" required="required"></td>
+              <td><input type="text" value="${user.userName}" class="name" name="userName" required="required"></td>
           </tr>
           <tr>
               <th>
                   <label for="id">아이디*</label>
               </th>
-              <td>id1234</td>
+              <td>${user.userId}</td>
           </tr>
           <tr>
               <th>
@@ -54,13 +54,18 @@
               <th>
                   <label for="check_pw">비밀번호확인*</label>
               </th>
-              <td><input type="password"></td>
+              <td>
+              	<input type="password">
+              	 <input type="button" id="checkPassword" class="btn btn-info btn-sm"  value="비밀번호 확인"
+                      onclick="passwordCk()">
+              </td>
+
           </tr>
           <tr>
               <th rowspan="3">
                   <label for="address">주소*</label>
               </th>
-              <td><input type="text">
+              <td>
                   <!-- 우편번호 찾기 post.js 파일 -->
 
                   <div>
@@ -92,28 +97,18 @@
               </td>
           </tr>
           <tr>
-              <td><input type="text">
-                  기본주소</td>
+              
           </tr>
           <tr>
-              <td><input type="text">
-                  나머지 주소</td>
+             
           </tr>
           <tr>
               <th>
                   <label for="phoneNum">휴대전화*</label>
               </th>
               <td>
-                  <select>
-                      <option>010</option>
-                      <option>011</option>
-                      <option>016</option>
-                      <option>017</option>
-                  </select>
-                  -
                   <input type="text" required="required">
-                  -
-                  <input type="text" required="required"></td>
+              </td>
           </tr>
       </table>
   </div>

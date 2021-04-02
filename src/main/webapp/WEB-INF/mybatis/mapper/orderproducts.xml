@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					 
+<mapper namespace="com.mycompany.webapp.dao.OrderProductsDao">
+
+
+
+	<insert id="insert">
+		insert into order_products
+		(order_no, product_no, user_id, amount, price, review_state)
+		values
+		(seq_orders_order_no.currval, #{productNo}, #{userId}, #{amount}, #{price}, 0)
+	</insert>
+
+
+	
+	<!-- <select id="selectAll" resultType="orderProduct">
+		select o.order_no,
+		p.product_no, p.amount, p.price, p.review_state
+		from order o,
+		order_products p
+		where p.order_no = o.order_no
+		and p.product_no =
+		#{productNo}
+	</select> -->
+
+
+</mapper>

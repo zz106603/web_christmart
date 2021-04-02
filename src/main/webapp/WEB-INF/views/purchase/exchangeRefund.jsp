@@ -30,21 +30,6 @@
 
      <!-- 교환/환불하고자하는 상품의 구매내역 상세정보 -->
      <div class="container-fluid border">
-         <div class="row exchangeContent">
-             <div class="col">
-                 <div class="img-sideline">
-                     <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/3.jpg"id="changeImg">
-                 </div>
-             </div>
-             <div class="col refund-product-details">
-                 <p>주문일자 : 2021.02.02<br/>
-                     주문번호 : 202102021129384059<br/>
-                     주문상품 : Snow Globe girl with star 9cm<br/>
-                     선택옵션 : 단일품목<br/>
-                     선택수량 : 1개</p>
-             </div>
-         </div>
-         <br>
 
          <div class="exchangeContent">
              <hr/>
@@ -54,11 +39,11 @@
              <form method="post" action="exchangerefund">
                  <div>
                      <div id="select-reason">
-                         <input type="radio" name="reason"> 상품이 마음에 안 들어서<br>
-                         <input type="radio" name="reason"> 상품에 하자가 있어서<br>
-                         <input type="radio" name="reason"> 서비스에 불만이 있어서<br>
-                         <input type="radio" name="reason"> 배송이 늦어서<br>
-                         <input type="radio" name="reason"> 말하기 싫음<br>
+                         <input type="radio" name="reason" value="1"> 상품이 마음에 안 들어서<br>
+                         <input type="radio" name="reason" value="2"> 상품에 하자가 있어서<br>
+                         <input type="radio" name="reason" value="3"> 서비스에 불만이 있어서<br>
+                         <input type="radio" name="reason" value="4"> 배송이 늦어서<br>
+                         <input type="radio" name="reason" value="5"> 말하기 싫음<br>
 
                      </div>
                  </div>
@@ -79,8 +64,8 @@
                  <!-- 교환환불 버튼 -->
                  <div id="refund-btn-div">
                      <input
+                     	 id="btnRefund"
                          type="submit"
-                         id="refund-btn"
                          onclick="alert('신청이 완료되었습니다.')"
                          value="교환/환불 신청">
                  </div>
@@ -89,6 +74,8 @@
              </form>
 
          </div>
+         
+         
      </div>
  </div>
 

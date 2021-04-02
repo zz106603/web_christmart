@@ -17,151 +17,84 @@
 
             <!-- 마이페이지 탭 목록 -->
             <div id="mypageList">
-                <a href="<%=application.getContextPath() %>/purchaselist" class="mypage-tab">구매내역</a>
-                <a href="<%=application.getContextPath() %>/wishlist" class="mypage-tab-clicked">위시리스트</a>
-                <a href="<%=application.getContextPath() %>/changeinfo" class="mypage-tab">개인정보수정</a>
-                <a href="<%=application.getContextPath() %>/withdrawal" class="mypage-tab">회원탈퇴</a>
+                <a href="<%=application.getContextPath() %>/user/purchaselist" class="mypage-tab">구매내역</a>
+                <a href="<%=application.getContextPath() %>/user/wishlist" class="mypage-tab-clicked">위시리스트</a>
+                <a href="<%=application.getContextPath() %>/user/changeinfo" class="mypage-tab">개인정보수정</a>
+                <a href="<%=application.getContextPath() %>/user/withdrawal" class="mypage-tab">회원탈퇴</a>
                 <a href="<%=application.getContextPath()%>/faq" class="mypage-tab">FAQ</a>
             </div>
 
-            <div class="wishlist">
+             <div class="wishlist">
                 <div class="wishlist-path">
                     <p>마이페이지 > 위시리스트</p>
                 </div>
             </div>
+                   
             <div class="wishlist-wrapper">
+        	     <table>
                 <!--카테고리 12개-->
                 <div class="row">
+          
+                <c:forEach var="wishlist" items="${list}">
                     <div class="col-3">
                         <a href="<%=application.getContextPath() %>/product">
                             <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/4.jpg">
+                              <img src="<%=application.getContextPath()%>${wishlist.imgSname}"> 
                             </div>
                         </a>
                         <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                            <form method="post" action="delwishlist" style="padding-left:35%;">
-                                <button type="submit" class="btn btn-primary bt-sm">삭제</button>
-                            </form>
+                            <p>${wishlist.productName}</p>
+                            
+	                       
+	                          <a class="btn btn-primary bt-sm" href="delwishlist?productNo=${wishlist.productNo}">삭제</a>
+	                           
                             </p>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <a href="<%=application.getContextPath() %>/product">
-                            <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/5.jpg">
-                            </div>
-                        </a>
-                        <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                                <button class="btn btn-primary bt-sm">삭제</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <a href="<%=application.getContextPath() %>/product">
-                            <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/6.jpg">
-                            </div>
-                        </a>
-                        <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                                <button class="btn btn-primary bt-sm">삭제</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <a href="<%=application.getContextPath() %>/product">
-                            <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/트리/장식용품/7.jpg">
-                            </div>
-                        </a>
-                        <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                                <button class="btn btn-primary bt-sm">삭제</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <a href="<%=application.getContextPath() %>/product">
-                            <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/캔들/5.jpg">
-                            </div>
-                        </a>
-                        <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                                <button class="btn btn-primary bt-sm">삭제</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <a href="<%=application.getContextPath() %>/product">
-                            <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/캔들/6.jpg">
-                            </div>
-                        </a>
-                        <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                                <button class="btn btn-primary bt-sm">삭제</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <a href="<%=application.getContextPath() %>/product">
-                            <div class="wishlist-product">
-                                <img src="<%=application.getContextPath() %>/resources/images/캔들/7.jpg">
-                            </div>
-                        </a>
-                        <div class="wishlist-title">
-                            <p>위시리스트 제목 샘플</p>
-                            <p>
-                                <button class="btn btn-primary bt-sm">삭제</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    
+                  </c:forEach>  
+                  
+        
+         <tr>
+	      <td colspan="5" style="text-center">
+	      	<div class="d-flex">
+	      		<div class="flex-grow-1">
+			         <a class="btn btn-outline-primary btn-sm"
+			           href="wishlist?pageNo=1">처음</a>
+			            
+			         <c:if test="${pager.groupNo>1}">
+			            <a class="btn btn-outline-info btn-sm"
+			            href="wishlist?pageNo=${pager.startPageNo-1}">이전</a>
+			         </c:if>
+			         
+			         <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+			            <c:if test="${pager.pageNo == i}">
+			               <a class="btn btn-outline-success btn-sm" 
+			                  href="wishlist?pageNo=${i}">${i}</a>
+			            </c:if>
+			            <c:if test="${pager.pageNo != i}">
+			               <a class="btn btn-outline-danger btn-sm" 
+			                  href="wishlist?pageNo=${i}">${i}</a>
+			            </c:if>
+			         </c:forEach>
+			         
+			         <c:if test="${pager.groupNo<pager.totalGroupNo}">
+			            <a class="btn btn-outline-info btn-sm"
+			            href="wishlist?pageNo=${pager.endPageNo+1}">다음</a>
+			         </c:if>
+			            
+			         <a class="btn btn-outline-primary btn-sm"
+			            href="wishlist?pageNo=${pager.totalPageNo}">맨끝</a>
+			         <!-- [처음][이전] 1 2 3 4 5 [다음][맨끝] -->
+		         </div>
+		     
+		      </div>
+	      </td>
+   </tr>
+     </table>               
 
-                <div class="pagination">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">5</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            
+             
+         
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
